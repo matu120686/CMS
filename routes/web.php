@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,30 +18,16 @@ Route::get('/', function () {
     return view('welcome');
 })->name('main');
 
-Route::get('products', function () {
-    return "Esta es la Ruta de Productos";
-})->name('products.index');
+Route::get('products', 'ProductController@index')->name('products.index');
 
-Route::get('products/create', function () {
-    return "Esta es la Ruta de Crear un Producto";
-})->name('products.create');
+Route::get('products/create', 'ProductController@create')->name('products.create');
 
-Route::post('products', function () {
-    //
-})->name('products.store');
+Route::post('products', 'ProductController@store')->name('products.store');
 
-Route::get('products/{product}', function ($product) {
-    return "Esta es la Ruta de Mostrar un Producto: {$product}";
-})->name('products.show');
+Route::get('products/{product}', 'ProductController@show')->name('products.show');
 
-Route::get('products/{product}/edit', function ($product) {
-    return "Esta es la Ruta de Editar un Producto: {$product}";
-})->name('products.edit');
+Route::get('products/{product}/edit', 'ProductController@edit')->name('products.edit');
 
-Route::match(['put', 'patch'], 'products/{product}', function ($product) {
-    //
-})->name('products.update');
+Route::match(['put', 'patch'], 'products/{product}', 'ProductController@update')->name('products.update');
 
-Route::delete('products/{product}', function ($product) {
-    //
-})->name('products.destroy');
+Route::delete('products/{product}', 'ProductController@destroy')->name('products.destroy');
